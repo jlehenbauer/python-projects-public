@@ -5,9 +5,9 @@ import psutil
 def check_disk_usage(disk):
 	du = shutil.disk_usage(disk)
 	free = du.free / du.total * 100
-	fig = px.pie(px.data, values=[free, 1-free], names=['Free', 'Used'])
-	fig.show()
-	return free > 20
+	#fig = px.pie(px.data, values=[free, 1-free], names=['Free', 'Used'])
+	#fig.show()
+	return free > 10
 
 def check_cpu_usage():
 	usage = psutil.cpu_percent(1)
