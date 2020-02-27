@@ -1,4 +1,3 @@
-#!"C:\Program Files\Python37\python.exe"
 import shutil
 import psutil
 
