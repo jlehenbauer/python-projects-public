@@ -35,7 +35,6 @@ each element of array A is an integer within the range [−2,147,483,648..2,147,
 def solution(A):
     A = sorted(A)
     for i in range(len(A) - 2):
-        for j in range(i + 2, len(A)):
-            if A[i] + A[i + 1] > A[j]:
-                return 1
+        if A[i] + A[i + 1] > A[i + 2]:
+            return 1
     return 0
