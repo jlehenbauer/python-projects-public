@@ -33,6 +33,27 @@ each element of array A is an integer within the range [0..2,147,483,647].
 
 def solution(A):
     total = 0
+    touched = {}
+    for i, r in enumerate(A):
+        #print("Add these to the circle for radius " + str(r) + " at position " + str(i))
+        begin = 0 if i-r-1 < 0 else i-r-1
+        end = i+r+1 if i+r+1 < len(A) else len(A)
+        #print(A[begin : end])
+        touched[i] = []
+        for j, r2 in enumerate(A[begin : end]):
+            if begin != 0:
+                j += begin
+            #print("Checking positions j: " + str(j) + " against i: " + str(i))
+            if j > i:
+                touched[i].append(j)
+            elif j < i:
+                if i not in touched[j]:
+                    touched[i].append(j)
+    #print(touched)
+    return sum(len(x) for x in touched.values())
+
+def solutionBAD(A):
+    total = 0
     for i, r in enumerate(A):
         # Get all following disks within r
         if i + r < len(A):
