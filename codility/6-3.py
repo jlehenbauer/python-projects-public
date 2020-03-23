@@ -31,7 +31,29 @@ N is an integer within the range [0..100,000];
 each element of array A is an integer within the range [0..2,147,483,647].
 """
 
-def solution(A):
+def solution_31pct(A):
+    total = 0
+    for i, r in enumerate(A):
+        # Get all following disks within r
+        if i + r < len(A):
+            total += r
+        else:
+            total += len(A) - (i + 1)
+        # Get new previous disks
+        begin = 0 if i-r-1 < 0 else i-r-1
+        if r == 0:
+            begin += 1
+        end = i
+        #print(A[begin:end])
+        for i2, r2 in enumerate(A[begin:end]):
+            #print("i:" + str(i) + " r:" + str(r) + " i2:" + str(i2) + " r2:" + str(r2))
+            #print("checking: {} + ({}) + {} < {})".format(r2, begin, i2, i))
+            if r2 + begin + i2 < i:
+                #print("Adding one")
+                total += 1
+    return total
+
+def solution_not_correct(A):
     total = 0
     touched = {}
     for i, r in enumerate(A):
