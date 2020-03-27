@@ -34,10 +34,13 @@ each element of array A is an integer within the range [0..2,147,483,647].
 def solution_correct_not_efficient(A):
     total = 0
     ints = []
+    # Create and sort an array of beginning and end points
     for i, r in enumerate(A):
         ints.append([i-r, i+r])
     ints = sorted(ints)
     #print(ints)
+    # Record every time an end point is >= a beginning point
+    # TODO: make this more efficient with a binary search
     for i, locs in enumerate(ints):
         for points in ints[i+1:]:
             if locs[1] >= points[0]:
