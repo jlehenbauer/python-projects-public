@@ -44,7 +44,10 @@ def solution(A, B):
         if B[i] == 1:
             current_downstream.append(A[i])
         elif current_downstream != []:
-            if A[i] > current_downstream[-1]:
+            count = 0
+            while current_downstream != [] and A[i] > current_downstream[-1]:
                 del current_downstream[-1]
-            eaten += 1
+                count += 1
+            eaten += count if count > 1 else 1
     return len(A) - eaten
+    
