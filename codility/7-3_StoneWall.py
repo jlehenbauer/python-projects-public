@@ -24,6 +24,23 @@ N is an integer within the range [1..100,000];
 each element of array H is an integer within the range [1..1,000,000,000].
 """
 
+# This is a working solution
+def solution(H):
+    stack = []
+    count = 0
+    for x in H:
+        while stack != [] and x < stack[-1]:
+            del stack[-1]
+        if stack != [] and x == stack[-1]:
+            pass
+        else:
+            stack.append(x)
+            count += 1
+    return count
+
+
+# This solution fails with large test cases
+# TODO: figure out what logic separates these two solutions
 def solution(H):
     stack = []
     blocks = 0
