@@ -37,11 +37,14 @@ def solution(H):
             stack.append(x)
             blocks += 1
         else:
+            add = 1
             while x <= stack[-1]:
                 del stack[-1]
                 if stack == []:
                     stack.append(x)
                     break
-            blocks += 1
+                elif stack[-1] == x:
+                    add = 0
+                    break
+            blocks += add
     return blocks
-	
