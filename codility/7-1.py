@@ -26,11 +26,11 @@ def solution(S):
         if x == '{' or x == '(' or x == '[':
             stack.append(x)
         else:
-            if x == '}' and stack[-1] == '{':
+            if stack and x == '}' and stack[-1] == '{':
                 stack.pop()
-            elif x == ')' and stack[-1] == '(':
+            elif stack and x == ')' and stack[-1] == '(':
                 stack.pop()
-            elif x == ']' and stack[-1] == '[':
+            elif stack and x == ']' and stack[-1] == '[':
                 stack.pop()
             else:
                 return 0
