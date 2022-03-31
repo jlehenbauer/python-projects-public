@@ -1,8 +1,9 @@
+from cmath import rect
 from turtle import *
 #import tkinter as tk
 
-MAX = 300
-MIN = -300
+MAX = 10
+MIN = -10
 PENCOLOR = (20, 150, 60)
 
 def main():
@@ -10,6 +11,9 @@ def main():
     #build_ui(window)
 
     screen = Screen()
+    screen.setup(400, 400)
+    screen.setworldcoordinates(-10, -10, 10, 10)
+
     colormode(255)
     pencolor(PENCOLOR)
 
@@ -39,14 +43,20 @@ def draw_axes():
     goto(MIN, 0)
 
 def convert_points(shapes):
-    local_max = max(max(shapes)[0], max(shapes)[1])
-    print(local_max)
+    local_max = 0
+    for shape in shapes:
+        new_max = max([x for x,y in shape] + [y for x,y in shape])
+        if new_max > local_max:
+            local_max = new_max
+
     new_shapes = []
     for shape in shapes:
         new_shape = []
         for x, y in shape:
-            new_shape = (x / local_max * MAX, y / local_max * MAX)
-            new_shapes.append(new_shape)
+            point = (x / local_max * MAX, y / local_max * MAX)
+            new_shape.append(point)
+        new_shapes.append(new_shape)
+        
     return new_shapes
 
 
@@ -61,24 +71,24 @@ def draw_polygon(points):
     end_poly()
     return get_poly()
 
-def translate(vector, shape):
+def translate(vector, shape, draw = True):
     new_shape = []
     for coord in shape:
         new_shape.append((coord[0] + vector[0], coord[1] + vector[1]))
-    draw_polygon(new_shape)
+    if draw: draw_polygon(new_shape)
     return new_shape
 
-def reflect(axis, shape):
+def reflect(axis, shape, draw = True):
     new_shape = []
     for coord in shape:
         if axis == 'x':
             new_shape.append((coord[0], -1 * coord[1]))
         elif axis == 'y':
             new_shape.append((-1 * coord[0], coord[1]))
-    draw_polygon(new_shape)
+    if draw: draw_polygon(new_shape)
     return new_shape
 
-def rotate(deg, shape, dir = 'CW'):
+def rotate(deg, shape, dir = 'CW', draw = True):
     deg = deg % 360
     new_shape = []
     if deg == 0:
@@ -93,17 +103,57 @@ def rotate(deg, shape, dir = 'CW'):
         elif dir == 'CCW':
             for coord in shape:
                 new_shape.append((-1 * coord[1], coord[0]))
-    draw_polygon(new_shape)
+    if draw: draw_polygon(new_shape)
     return new_shape
 
 def mrl_project():
-    rectangle = [(5, 0), (5, 2), (6, 2), (6, 0)]
+    pencolor(shift_pencolor(pencolor(), 75))
 
-    poly_list = [rectangle]
-    poly_list = convert_points(poly_list)
+    rectangle = [(9, 0), (9, 2), (10, 2), (10, 0)]
 
-    for shape in poly_list:
-        draw_polygon(shape)
+    # Reflect Rectangle over y-axis
+    opp_rect = reflect('y', rectangle, False)
+
+    draw_polygon(rectangle)
+    draw_polygon(opp_rect)
+
+
+    # Translate Rectangle <-2, 0>
+    # Translate Rectangle <-4, 0>
+    # Translate Rectangle <-6, 0>
+    # Translate Rectangle <-8, 0>
+    translate((-2, 0), rectangle)
+    translate((-4, 0), rectangle)
+    translate((-6, 0), rectangle)
+    translate((-8, 0), rectangle)
+
+    # Translate Opposite Rectangle <2, 0>
+    # Translate Opposite Rectangle <4, 0>
+    # Translate Opposite Rectangle <6, 0>
+    # Translate Opposite Rectangle <8, 0>
+    translate((2, 0), opp_rect)
+    translate((4, 0), opp_rect)
+    translate((6, 0), opp_rect)
+    translate((8, 0), opp_rect)
+
+    # Rotate Rectangle 90 CCW, translate <-5, -7>
+    # Rotate Rectangle 90 CCW, translate <-3, -7>
+    # Rotate Rectangle 90 CCW, translate <-1, -7>
+    # Rotate Rectangle 90 CCW, translate <1, -7>
+    # Rotate Rectangle 90 CCW, translate <3, -7>
+    # Rotate Rectangle 90 CCW, translate <5, -7>
+    # Rotate Rectangle 90 CCW, translate <7, -7>
+    # Rotate Rectangle 90 CCW, translate <9, -7>
+    translate((-7, -7), rotate(90, rectangle, 'CCW', False))
+    translate((-5, -7), rotate(90, rectangle, 'CCW', False))
+    translate((-3, -7), rotate(90, rectangle, 'CCW', False))
+    translate((-1, -7), rotate(90, rectangle, 'CCW', False))
+    translate((1, -7), rotate(90, rectangle, 'CCW', False))
+    translate((3, -7), rotate(90, rectangle, 'CCW', False))
+    translate((5, -7), rotate(90, rectangle, 'CCW', False))
+    translate((7, -7), rotate(90, rectangle, 'CCW', False))
+    translate((9, -7), rotate(90, rectangle, 'CCW', False))
+
 
 def test():
 
