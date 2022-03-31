@@ -1,13 +1,13 @@
 from turtle import *
-import tkinter as tk
+#import tkinter as tk
 
 MAX = 300
 MIN = -300
 PENCOLOR = (20, 150, 60)
 
 def main():
-    window = tk.Tk()
-    build_ui(window)
+    #window = tk.Tk()
+    #build_ui(window)
 
     screen = Screen()
     colormode(255)
@@ -15,29 +15,12 @@ def main():
 
     draw_axes()
 
-    test()
-    #mrl_project()
+    #test()
+    mrl_project()
 
     screen.exitonclick()
 
-def build_ui(window):
-    label = tk.Label(text = "Trasnformation builder").pack()
-    button_make_poly = tk.Button(text = "Create Polygon",
-                                    width=30,
-                                    height = 10,
-                                    command = lambda: make_poly(entry_num_points)
-                                    ).pack()
-    entry_num_points = tk.Entry(width = 50).pack()
-    window.mainloop()
-
-def make_poly(points):
-    if points <= 2:
-        return False
-    for i in points:
-        pass
     
-
-
 def shift_pencolor(pc, shift):
     new_pc = [int(pc[0] + shift), int(pc[1] + shift), int(pc[2] + shift)]
     for i in range(len(new_pc)):
@@ -54,6 +37,18 @@ def draw_axes():
     goto(MAX, 0)
     pd()
     goto(MIN, 0)
+
+def convert_points(shapes):
+    local_max = max(max(shapes)[0], max(shapes)[1])
+    print(local_max)
+    new_shapes = []
+    for shape in shapes:
+        new_shape = []
+        for x, y in shape:
+            new_shape = (x / local_max * MAX, y / local_max * MAX)
+            new_shapes.append(new_shape)
+    return new_shapes
+
 
 def draw_polygon(points):
     points.append(points[0])
@@ -102,7 +97,13 @@ def rotate(deg, shape, dir = 'CW'):
     return new_shape
 
 def mrl_project():
-    pass
+    rectangle = [(5, 0), (5, 2), (6, 2), (6, 0)]
+
+    poly_list = [rectangle]
+    poly_list = convert_points(poly_list)
+
+    for shape in poly_list:
+        draw_polygon(shape)
 
 def test():
 
@@ -117,6 +118,17 @@ def test():
         reflect('y', shape)
         rotate(90, shape)
         pencolor(shift_pencolor(pencolor(), 60))
+
+
+def build_ui(window):
+    label = tk.Label(text = "Trasnformation builder").pack()
+    button_make_poly = tk.Button(text = "Create Polygon",
+                                    width=30,
+                                    height = 10,
+                                    command = lambda: make_poly(entry_num_points.get())
+                                    ).pack()
+    entry_num_points = tk.Entry(width = 50).pack()
+    window.mainloop()
 
 
 
