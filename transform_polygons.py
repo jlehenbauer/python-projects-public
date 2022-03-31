@@ -1,14 +1,13 @@
-from cmath import rect
 from turtle import *
+from random import randint, randrange
 #import tkinter as tk
 
 MAX = 10
 MIN = -10
-PENCOLOR = (20, 150, 60)
+PENCOLOR = (randint(0, 255), randint(0, 255), randint(0, 255))
+all_shapes = []
 
 def main():
-    #window = tk.Tk()
-    #build_ui(window)
 
     screen = Screen()
     screen.setup(400, 400)
@@ -19,8 +18,13 @@ def main():
 
     draw_axes()
 
-    #test()
     mrl_project()
+""" 
+    print(all_shapes)
+
+    for shape in all_shapes:
+        pencolor(randint(0, 255), randint(0, 255), randint(0, 255))
+        reflect('x', shape) """
 
     screen.exitonclick()
 
@@ -69,6 +73,7 @@ def draw_polygon(points):
     for point in points[1:]:
         goto(point)
     end_poly()
+    all_shapes.append(get_poly())
     return get_poly()
 
 def translate(vector, shape, draw = True):
@@ -106,16 +111,32 @@ def rotate(deg, shape, dir = 'CW', draw = True):
     if draw: draw_polygon(new_shape)
     return new_shape
 
+def dilate(factor, shape, draw = True):
+    new_shape = []
+    for coord in shape:
+        new_shape.append((factor * coord[0], factor * coord[1]))
+    if draw: draw_polygon(new_shape)
+    return new_shape
+    
+
 def mrl_project():
-    pencolor(shift_pencolor(pencolor(), 75))
+    pencolor(shift_pencolor(pencolor(), 110))
 
     rectangle = [(9, 0), (9, 2), (10, 2), (10, 0)]
-
-    # Reflect Rectangle over y-axis
-    opp_rect = reflect('y', rectangle, False)
+    triangle = [(-2, 3), (0, 5), (2, 3)]
 
     draw_polygon(rectangle)
-    draw_polygon(opp_rect)
+    draw_polygon(triangle)
+
+    # Reflect Rectangle over y-axis
+    opp_rect = reflect('y', rectangle)
+
+    # Dilate Triangle with scale factor of 2, translate <0, -3>
+    # Dilate Triangle with scale factor of 2, translate <-6, -3>
+    # Dilate Triangle with scale factor of 2, translate <6, -3>
+    translate((0, -3), dilate(2, triangle, False))
+    translate((-6, -3), dilate(2, triangle, False))
+    translate((6, -3), dilate(2, triangle, False))
 
 
     # Translate Rectangle <-2, 0>
@@ -153,21 +174,6 @@ def mrl_project():
     translate((5, -7), rotate(90, rectangle, 'CCW', False))
     translate((7, -7), rotate(90, rectangle, 'CCW', False))
     translate((9, -7), rotate(90, rectangle, 'CCW', False))
-
-
-def test():
-
-    square = [(100, 100), (100, 200), (200, 200), (200, 100)]
-    triangle = [(50, 50), (200, 50), (150, 100)]
-    hexagon = [(-50, -100), (-50, -200), (-100, -250), (-150, -200), (-150, -100), (-100, -50)]
-    poly_list = [square, triangle, hexagon]
-
-    for shape in poly_list:
-        draw_polygon(shape)
-        translate((-30, 30), shape)
-        reflect('y', shape)
-        rotate(90, shape)
-        pencolor(shift_pencolor(pencolor(), 60))
 
 
 def build_ui(window):
