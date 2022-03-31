@@ -1,42 +1,49 @@
 from turtle import *
+import tkinter as tk
+
 MAX = 300
 MIN = -300
 PENCOLOR = (20, 150, 60)
 
 def main():
+    window = tk.Tk()
+    build_ui(window)
+
     screen = Screen()
     colormode(255)
     pencolor(PENCOLOR)
 
     draw_axes()
 
-    mrl_project()
+    test()
+    #mrl_project()
 
     screen.exitonclick()
 
-def mrl_project():
+def build_ui(window):
+    label = tk.Label(text = "Trasnformation builder").pack()
+    button_make_poly = tk.Button(text = "Create Polygon",
+                                    width=30,
+                                    height = 10,
+                                    command = lambda: make_poly(entry_num_points)
+                                    ).pack()
+    entry_num_points = tk.Entry(width = 50).pack()
+    window.mainloop()
 
-    square = [(100, 100), (100, 200), (200, 200), (200, 100)]
-    triangle = [(50, 50), (200, 50), (150, 100)]
-    poly_list = [square, triangle]
+def make_poly(points):
+    if points <= 2:
+        return False
+    for i in points:
+        pass
+    
 
-    for shape in poly_list:
-        draw_polygon(shape)
-        translate((-30, 30), shape)
-        reflect('y', shape)
-        rotate(90, shape)
-        pencolor(shift_pencolor(pencolor(), 60))
 
 def shift_pencolor(pc, shift):
     new_pc = [int(pc[0] + shift), int(pc[1] + shift), int(pc[2] + shift)]
-    print(new_pc)
     for i in range(len(new_pc)):
         if new_pc[i] > 255:
             new_pc[i] = new_pc[i] % 255
     return tuple(new_pc)
-
-
-
 
 def draw_axes():
     pu()
@@ -94,7 +101,22 @@ def rotate(deg, shape, dir = 'CW'):
     draw_polygon(new_shape)
     return new_shape
 
+def mrl_project():
+    pass
 
+def test():
+
+    square = [(100, 100), (100, 200), (200, 200), (200, 100)]
+    triangle = [(50, 50), (200, 50), (150, 100)]
+    hexagon = [(-50, -100), (-50, -200), (-100, -250), (-150, -200), (-150, -100), (-100, -50)]
+    poly_list = [square, triangle, hexagon]
+
+    for shape in poly_list:
+        draw_polygon(shape)
+        translate((-30, 30), shape)
+        reflect('y', shape)
+        rotate(90, shape)
+        pencolor(shift_pencolor(pencolor(), 60))
 
 
 
