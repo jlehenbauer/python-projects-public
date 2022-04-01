@@ -17,9 +17,11 @@ def main():
     pencolor(PENCOLOR)
 
     draw_axes()
+    pencolor(randint(0, 255), randint(0, 255), randint(0, 255))
 
-    mrl_project()
-""" 
+    nick_project()
+    #mrl_project()
+    """ 
     print(all_shapes)
 
     for shape in all_shapes:
@@ -98,6 +100,12 @@ def rotate(deg, shape, dir = 'CW', draw = True):
     new_shape = []
     if deg == 0:
         return shape
+    elif deg == 60:
+        if dir == 'CW':
+            for coord in shape:
+                x = coord[0]/2 - coord[1]*(3**.5)/2
+                y = coord[0]*3**.5/2 + coord[1]/2
+                new_shape.append((x, y))
     elif deg == 180:
         for coord in shape:
             new_shape.append((-1 * coord[0], -1 * coord[1]))
@@ -118,6 +126,13 @@ def dilate(factor, shape, draw = True):
     if draw: draw_polygon(new_shape)
     return new_shape
     
+def nick_project():
+    kite = [(4, 1),  (7, 3), (4, 9), (1, 3)]
+
+    draw_polygon(kite)
+
+    rotate(60, rotate(60, rotate(60, rotate(60, rotate(60, kite)))))
+
 
 def mrl_project():
     pencolor(shift_pencolor(pencolor(), 110))
