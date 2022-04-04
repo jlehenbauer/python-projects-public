@@ -20,9 +20,9 @@ def main():
     pencolor(randint(0, 255), randint(0, 255), randint(0, 255))
 
     #nick_project()
-    #preston_project()
+    preston_project()
     #mrl_project()
-    alden_project()
+    #alden_project()
     #aiden_project()
     #tyson_project()
     #example()
@@ -97,6 +97,8 @@ def reflect(axis, shape, draw = True):
             new_shape.append((coord[0], -1 * coord[1]))
         elif axis == 'y':
             new_shape.append((-1 * coord[0], coord[1]))
+        elif axis == 'y=x' or axis == 'y = x' or axis == 'x = y' or axis == 'x=y':
+            new_shape.append((coord[1], coord[0]))
     if draw: draw_polygon(new_shape)
     return new_shape
 
@@ -167,13 +169,43 @@ def preston_project():
     Rec7 = [(0, 0), (7,0), (7, 1), (0, 1)]
     Rec8 = [(0, 0), (8,0), (8, 1), (0, 1)]
 
-    draw_polygon(Rec1)
-    draw_polygon(Rec2)
-    draw_polygon(Rec4)
-    draw_polygon(Rec5)
-    draw_polygon(Rec6)
-    draw_polygon(Rec7)
-    draw_polygon(Rec8)
+    translate((0, 1), Rec1)
+    translate((1, 0), Rec1)
+    translate((3, 2), Rec1)
+    translate((6, 13), Rec1)
+    translate((4, 16), Rec1)
+    translate((1, 11), Rec1)
+    translate((0, 10), Rec1)
+    translate((-3, 8), Rec1)
+    translate((-6, 8), Rec1)
+    translate((-7, 9), Rec1)
+    translate((-7, 4), Rec1)
+    translate((-6, 3), Rec1)
+    translate((-5, 2), Rec1)
+    translate((-4, 1), Rec1)
+    translate((-2, -1), Rec1)
+    translate((-1, 0), Rec1)
+    translate((2, -3), Rec2)
+    translate((6, 9), Rec2)
+    translate((-2, 9), Rec2)
+    translate((-5, 7), Rec2)
+    translate((-3, -3), Rec2)
+
+    translate((5, 3), rotate(90, Rec2, 'CCW', False))
+    translate((8, 8), rotate(90, Rec2, 'CCW', False))
+    translate((6, 10), rotate(90, Rec2, 'CCW', False))
+
+    translate((6, 12), Rec4)
+    translate((6, 5), rotate(90, Rec4, 'CCW', False))
+    translate((12, 14), rotate(90, Rec4, 'CCW', False))
+    translate((-2, -3), rotate(90, Rec4, 'CCW', False))
+
+    translate((7, 14), Rec5)
+    translate((3, -3), rotate(90, Rec5, 'CCW', False))
+    translate((3, 12), rotate(90, Rec6, 'CCW', False))
+    translate((-7, 5), rotate(90, Rec7, 'CCW', False))
+
+    translate((3, 18), Rec8)
 
 
 def mrl_project():
