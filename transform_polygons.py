@@ -2,8 +2,8 @@ from turtle import *
 from random import randint, randrange
 #import tkinter as tk
 
-MAX = 10
-MIN = -10
+MAX = 20
+MIN = -20
 PENCOLOR = (randint(0, 255), randint(0, 255), randint(0, 255))
 all_shapes = []
 
@@ -11,7 +11,7 @@ def main():
 
     screen = Screen()
     screen.setup(400, 400)
-    screen.setworldcoordinates(-10, -10, 10, 10)
+    screen.setworldcoordinates(MIN, MIN, MAX, MAX)
 
     colormode(255)
     pencolor(PENCOLOR)
@@ -19,8 +19,13 @@ def main():
     draw_axes()
     pencolor(randint(0, 255), randint(0, 255), randint(0, 255))
 
-    nick_project()
+    #nick_project()
+    #preston_project()
     #mrl_project()
+    alden_project()
+    #aiden_project()
+    #tyson_project()
+    #example()
     """ 
     print(all_shapes)
 
@@ -127,11 +132,48 @@ def dilate(factor, shape, draw = True):
     return new_shape
     
 def nick_project():
-    kite = [(4, 1),  (7, 3), (4, 9), (1, 3)]
+    shape_A = [ (3,0), (0.45,-6), (3,-8), (6.45,-6) ]
 
-    draw_polygon(kite)
+    draw_polygon(shape_A)
 
-    rotate(60, rotate(60, rotate(60, rotate(60, rotate(60, kite)))))
+    shape_B = rotate(60, shape_A)
+
+    shape_C = rotate(60, shape_B)
+
+    shape_D = rotate(60, shape_C)
+
+    shape_E = rotate(60, shape_D)
+
+    shape_F = rotate(60, shape_E)
+
+    reflect( 'x' , shape_A)
+
+    reflect( 'x' , shape_B)
+
+    reflect( 'x' , shape_C)
+
+    reflect( 'x' , shape_D)
+
+    reflect( 'x' , shape_E)
+
+    reflect( 'x' , shape_F)
+
+def preston_project():
+    Rec1 = [(0, 0), (1, 0), (1,1),(0, 1)]
+    Rec2 = [(0, 0), (2, 0), (2, 1), (0, 1)]
+    Rec4 = [(0, 0), (4,0), (4, 1), (0, 1)]
+    Rec5 = [(0, 0), (5,0), (5, 1), (0, 1)]
+    Rec6 = [(0, 0), (6,0), (6, 1), (0, 1)]
+    Rec7 = [(0, 0), (7,0), (7, 1), (0, 1)]
+    Rec8 = [(0, 0), (8,0), (8, 1), (0, 1)]
+
+    draw_polygon(Rec1)
+    draw_polygon(Rec2)
+    draw_polygon(Rec4)
+    draw_polygon(Rec5)
+    draw_polygon(Rec6)
+    draw_polygon(Rec7)
+    draw_polygon(Rec8)
 
 
 def mrl_project():
@@ -190,6 +232,75 @@ def mrl_project():
     translate((7, -7), rotate(90, rectangle, 'CCW', False))
     translate((9, -7), rotate(90, rectangle, 'CCW', False))
 
+def example():
+    shape1 = [(1, 2), (3, 5), (-3, -2)]
+    shape2 = [(3, 4), (-1, -3), (-4, -6), (-2, 4)]
+
+
+
+    translate((-3, 4), shape1)
+
+    dilate(2, shape2)
+
+    rotate(180, shape1)
+
+    reflect('y', shape2)
+
+def alden_project():
+    Squair = [(2, 10), (4, 10), (4, 8), (2, 8)]
+    Rectangle = [(4, -1), (6, -1), (6, 3), (5, 3)]
+    Triangle = [(4, -1), (6, -1), (4, -3)]
+
+    Squair2 = reflect('y', Squair)
+
+    draw_polygon(Squair)
+    draw_polygon(Rectangle)
+    draw_polygon(Triangle)
+
+    translate((0, -2), Squair)
+    translate((-2, -2), Squair)
+    translate((0, -4), Squair)
+    translate((2, -2), Squair)
+
+    translate((0, -2), Squair2)
+    translate((-2, -2), Squair2)
+    translate((0, -4), Squair2)
+    translate((2, -2), Squair2)
+
+def aiden_project():
+    Triangle = [ (1,6), (2,8), (4,9) ]
+    Octagon = [ (-1,6), (1,6), (-2,5), (2,5), (-2,3), (2,3), (-1,2), (1,2) ]
+    Rectangle = [ (-7,9), (7,9), (-7,-6), (7,-6) ]
+    Rectangle2 = [ (2,1), (7,1), (2,-1), (7,-1) ]
+
+    draw_polygon(Triangle)
+    draw_polygon(Octagon)
+    draw_polygon(Rectangle)
+    draw_polygon(Rectangle2)
+
+    reflect('y', Triangle)
+    translate((0,-4), Octagon)
+    dilate(2, Rectangle)
+
+def tyson_project():
+    trapezoid = [(-10,-3) , (-6,0) , (6,0), (10,-3)] 
+    rectangle = [(-6,0), (-6,7), (-5,0), (-5,7)]
+    draw_polygon (trapezoid)
+    draw_polygon (rectangle)
+    translate((0,3), rectangle)
+    translate((0,5), rectangle)
+    translate((0,8), rectangle)
+    translate((0,10), rectangle)
+    translate((0,12), rectangle)
+    triangle = [(-7,7), (0,10), (0,7)]
+    draw_polygon(triangle)
+    reflect ('y', triangle)
+    Rectangle1 =[(6 ,0), (0 ,0), (0 ,1), (6 ,1)]
+    Rectangle2 =[(7 ,-1), (7 ,-1), (0 , -2), (0, -1)]
+    Rectangle3 =[( 9, -3), (9 , -4), (0 , -3), (0 ,-4)]
+    rotate(180, Rectangle1)
+    rotate(180, Rectangle2)
+    rotate(180, Rectangle3)
 
 def build_ui(window):
     label = tk.Label(text = "Trasnformation builder").pack()
