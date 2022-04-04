@@ -20,12 +20,12 @@ def main():
     pencolor(randint(0, 255), randint(0, 255), randint(0, 255))
 
     #nick_project()
-    preston_project()
-    #mrl_project()
+    #preston_project()
     #alden_project()
     #aiden_project()
-    #tyson_project()
+    tyson_project()
     #example()
+    #mrl_project()
     """ 
     print(all_shapes)
 
@@ -279,8 +279,13 @@ def example():
     reflect('y', shape2)
 
 def alden_project():
+    """
+    Picture created exactly as planned!
+    4 figures, translations and reflections used, no rotations.
+    90%
+    """
     Squair = [(2, 10), (4, 10), (4, 8), (2, 8)]
-    Rectangle = [(4, -1), (6, -1), (6, 3), (5, 3)]
+    Rectangle = [(4, -1), (6, -1), (6, 3), (4, 3)]
     Triangle = [(4, -1), (6, -1), (4, -3)]
 
     Squair2 = reflect('y', Squair)
@@ -299,11 +304,19 @@ def alden_project():
     translate((0, -4), Squair2)
     translate((2, -2), Squair2)
 
+    reflect('y', Rectangle)
+    reflect('y', Triangle)
+
 def aiden_project():
+    """
+    Great job! This was well-planned and accurately described.
+    4 shapes, translation, reflection, and dilation used (no rotation)
+    95%
+    """
     Triangle = [ (1,6), (2,8), (4,9) ]
-    Octagon = [ (-1,6), (1,6), (-2,5), (2,5), (-2,3), (2,3), (-1,2), (1,2) ]
-    Rectangle = [ (-7,9), (7,9), (-7,-6), (7,-6) ]
-    Rectangle2 = [ (2,1), (7,1), (2,-1), (7,-1) ]
+    Octagon = [ (-1,6), (1,6), (2,5), (2,3), (1,2), (-1,2), (-2,3), (-2,5) ]
+    Rectangle = [ (-7,9), (7,9), (7,-6), (-7,-6) ]
+    Rectangle2 = [ (2,1), (7,1), (7,-1), (2,-1) ]
 
     draw_polygon(Triangle)
     draw_polygon(Octagon)
@@ -314,25 +327,42 @@ def aiden_project():
     translate((0,-4), Octagon)
     dilate(2, Rectangle)
 
+    #Mr. L addition:
+    reflect('y', Rectangle2)
+
 def tyson_project():
+    """
+    Included 8 shapes, translations, reflections, and rotations. 
+    Some inaccuracies, mainly rotations (watch out for those!), but overall accurate and a good picture!
+    95%
+    """
     trapezoid = [(-10,-3) , (-6,0) , (6,0), (10,-3)] 
-    rectangle = [(-6,0), (-6,7), (-5,0), (-5,7)]
+    rectangle = [(-6,0), (-6,7), (-5,7), (-5,0)]
     draw_polygon (trapezoid)
     draw_polygon (rectangle)
-    translate((0,3), rectangle)
-    translate((0,5), rectangle)
-    translate((0,8), rectangle)
-    translate((0,10), rectangle)
-    translate((0,12), rectangle)
+    translate((3,0), rectangle)
+    translate((5,0), rectangle)
+    translate((8,0), rectangle)
+    translate((10,0), rectangle)
+    translate((12,0), rectangle)
     triangle = [(-7,7), (0,10), (0,7)]
     draw_polygon(triangle)
     reflect ('y', triangle)
     Rectangle1 =[(6 ,0), (0 ,0), (0 ,1), (6 ,1)]
-    Rectangle2 =[(7 ,-1), (7 ,-1), (0 , -2), (0, -1)]
-    Rectangle3 =[( 9, -3), (9 , -4), (0 , -3), (0 ,-4)]
+    Rectangle2 =[(7 ,-1), (7 ,-2), (0 , -2), (0, -1)]
+    Rectangle3 =[( 9, -3), (9 , -4), (0 ,-4), (0 , -3)]
+    draw_polygon(Rectangle1)
+    draw_polygon(Rectangle2)
+    draw_polygon(Rectangle3)
     rotate(180, Rectangle1)
     rotate(180, Rectangle2)
     rotate(180, Rectangle3)
+    Rect4 = [(-2, 6), (-2, 10), (-4, 10), (-4, 6)]
+    draw_polygon(Rect4)
+    reflect('y', Rect4)
+    Rect5 = [(2, 6), (2, 10), (4, 10), (4, 6)]
+    draw_polygon(Rect5)
+    translate((0, 6), rotate(90, Rect5, "CCW", False))
 
 def build_ui(window):
     label = tk.Label(text = "Trasnformation builder").pack()
