@@ -17,9 +17,13 @@ def main():
 
     already_assigned = {person:[] for person in people}
 
-    print("Sending to first station . . .")
+    while len(already_assigned[list(already_assigned.keys())[0]]) < num_stations:
 
-    already_assigned = stations(people, num_stations, already_assigned)
+        print("Sending to first station . . .")
+
+        already_assigned = stations(people, num_stations, already_assigned)
+
+        input("Press enter to continue")
 
 def stations(people, num_stations, already_assigned):
     assignments = {(x+1):[] for x in range(num_stations)}
